@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:pawpulse/config/gemini_config.dart';
+import 'package:pawpulse/config/gemini_config.example.dart';
 import 'package:pawpulse/widgets/image_source_picker.dart';
 import 'package:pawpulse/theme/app_theme.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:pawpulse/providers/firebase_provider.dart';
-import 'package:pawpulse/config/gemini_config.dart';
+import 'package:pawpulse/config/gemini_config.example.dart';
 
 /// Applied AI Feature: a pet-wellness chat assistant.
 ///

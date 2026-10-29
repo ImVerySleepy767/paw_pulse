@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pawpulse/config/nets_config.dart';
+import 'package:pawpulse/config/nets_config.example.dart';
 import 'package:pawpulse/models/nets_qr_result.dart';
 
 class NetsService {
