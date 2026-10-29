@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // users/{uid} — profile doc, keyed by the Firebase Auth UID.
+    // Only the owning user can read or write their own profile.
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // daily_health_log/{logId} — CRUD collection for pet health entries.
+    // A user may only read/update/delete logs where user_id == their own uid,
+    // and may only create a log if they stamp it with their own uid
+    // (prevents writing logs under someone else's account).
+    match /daily_health_log/{logId} {
+      allow read, update, delete: if request.auth != null
+        && request.auth.uid == resource.data.user_id;
+      allow create: if request.auth != null
+        && request.auth.uid == request.resource.data.user_id;
+    }
+
+    // transactions/{transactionId} — NETS payment records.
+    // Users can create/read their own transactions; transactions are
+    // immutable once written (no update/delete) since they represent
+    // a payment record.
+    match /transactions/{transactionId} {
+      allow read: if request.auth != null
+        && request.auth.uid == resource.data.user_id;
+      allow create: if request.auth != null
+        && request.auth.uid == request.resource.data.user_id;
+      allow update, delete: if false;
+    }
+
+    // trainers/{trainerId} — read-only public catalogue, no client writes.
+    match /trainers/{trainerId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

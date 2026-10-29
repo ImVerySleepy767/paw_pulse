@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "ace4aa8a-5a93-49bf-9ce4-b5d1e1734d04",
+		"name": "NETS QR Tryout",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34119085"
+	},
+	"item": [
+		{
+			"name": "RequestAPI",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "project-id",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"txn_id\": \"sandbox_nets|m|8ff8e5b6-d43e-4786-8ac5-7accf8c5bd9b\",\r\n\t\"amt_in_dollars\": 3,\r\n\t\"notify_mobile\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://sandbox.nets.openapipaas.com/api/v1/common/payments/nets-qr/request"
+			},
+			"response": []
+		},
+		{
+			"name": "S2SWebhookAPI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "project-id",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sandbox.nets.openapipaas.com/api/v1/common/payments/nets/webhook?txn_retrieval_ref=0g7x8svg8h59",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"nets",
+						"openapipaas",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"common",
+						"payments",
+						"nets",
+						"webhook"
+					],
+					"query": [
+						{
+							"key": "txn_retrieval_ref",
+							"value": "0g7x8svg8h59"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryAPI",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "project-id",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"txn_retrieval_ref\": \"0g7x8svg8h59\",\r\n\t\"frontend_timeout_status\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://sandbox.nets.openapipaas.com/api/v1/common/payments/nets-qr/query"
+			},
+			"response": []
+		}
+	]
+}
